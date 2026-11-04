@@ -12,7 +12,7 @@
 		"sources": "https://github.com/ImGRUI/solid-bar",
 		"issues": "https://github.com/ImGRUI/solid-bar/issues"
 	},
-	"license": "LGPLv3",
+	"license": "GPL-3.0",
 	"icon": "assets/solid-bar/icon.png",
 	"environment": "client",
 	"entrypoints": {
