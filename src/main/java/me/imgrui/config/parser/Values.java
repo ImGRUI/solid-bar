@@ -109,17 +109,17 @@ public class Values {
         }
 
         public static double getHealth() {
-            if (mc.crosshairPickEntity == null) return 0;
+            if (mc.crosshairPickEntity == null || mc.crosshairPickEntity.asLivingEntity() == null) return 0;
             return Math.round(mc.crosshairPickEntity.asLivingEntity().getHealth() * 10) / 10.0;
         }
 
         public static double getMaxHealth() {
-            if (mc.crosshairPickEntity == null) return 0;
+            if (mc.crosshairPickEntity == null || mc.crosshairPickEntity.asLivingEntity() == null) return 0;
             return Math.round(mc.crosshairPickEntity.asLivingEntity().getMaxHealth() * 10) / 10.0;
         }
 
         public static double getHealthPercent() {
-            if (mc.crosshairPickEntity == null) return 0;
+            if (mc.crosshairPickEntity == null || mc.crosshairPickEntity.asLivingEntity() == null) return 0;
             return Math.round(mc.crosshairPickEntity.asLivingEntity().getHealth() * 100 / mc.crosshairPickEntity.asLivingEntity().getMaxHealth() * 10) / 10.0;
         }
 
