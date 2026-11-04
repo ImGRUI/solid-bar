@@ -1,0 +1,32 @@
+{
+  "solid-bar": "Solid Bar",
+
+  "solid-bar.world.overworld": "Overworld",
+  "solid-bar.world.the_nether": "The Nether",
+  "solid-bar.world.the_end": "The End",
+
+  "solid-bar.modEnabled": "Enabled",
+  "solid-bar.modEnabled.description": "Mod toggle",
+
+  "solid-bar.stealthMode": "Stealth Mode",
+  "solid-bar.stealthMode.description": "Toggles stealth mode, which hides direction and coordinates. If you use formatting codes on coordinates, it's recommended that you format each value separately while using this option (this is not needed on 26.2)",
+
+  "solid-bar.modBar": "Bar Localization",
+  "solid-bar.modBar.description": "Customize your info! Use &code to format (minecraft.wiki/w/Formatting_codes) and {type.additional} to paste values (check them on mod page)",
+
+  "solid-bar.renderType": "Type of Renderer",
+  "solid-bar.renderType.description": "Changes renderer position",
+
+  "solid-bar.defaultRenderIndentY": "DEFAULT Render Y-axis Indent",
+  "solid-bar.defaultRenderIndentY.description": "Changes the Y-axis indentation in the DEFAULT renderer",
+
+  "solid-bar.renderIndentX": "X-axis Render Indent",
+  "solid-bar.renderIndentX.description": "Changes the X-axis indentation in the other renderers (not DEFAULT)",
+
+  "solid-bar.renderIndentY": "Y-axis Render Indent",
+  "solid-bar.renderIndentY.description": "Changes the Y-axis indentation in the other renderers (not DEFAULT)",
+
+  "key.category.solid-bar.keybinds": "Solid Bar",
+  "key.solid-bar.toggleModEnabled": "Toggle Mod",
+  "key.solid-bar.toggleStealthMode": "Toggle Stealth Mode"
+}

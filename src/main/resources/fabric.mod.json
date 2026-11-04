@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "solid-bar",
+	"version": "${mod_version}",
+	"name": "Solid Bar",
+	"description": "Shows configurable info above your hotbar.",
+	"authors": [
+		"ImGRUI"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/mod/solid-bar",
+		"sources": "https://github.com/ImGRUI/solid-bar",
+		"issues": "https://github.com/ImGRUI/solid-bar/issues"
+	},
+	"license": "LGPLv3",
+	"icon": "assets/solid-bar/icon.png",
+	"environment": "client",
+	"entrypoints": {
+		"main": [
+			"me.imgrui.SolidBar"
+		],
+		"modmenu": [
+			"me.imgrui.config.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"solid-bar.mixins.json"
+	],
+	"depends": {
+		"fabricloader": "*",
+		"minecraft": "${mod_target}",
+		"fabric-api": "*",
+		"yet_another_config_lib_v3": "*"
+	}
+}

@@ -1,0 +1,32 @@
+{
+  "solid-bar": "Solid Bar",
+
+  "solid-bar.world.overworld": "Верхний мир",
+  "solid-bar.world.the_nether": "Незер",
+  "solid-bar.world.the_end": "Энд",
+
+  "solid-bar.modEnabled": "Включить Solid Bar",
+  "solid-bar.modEnabled.description": "Вкл/Выкл мод",
+
+  "solid-bar.stealthMode": "Режим стелса",
+  "solid-bar.stealthMode.description": "Включает режим стелса, который скрывает направление и координаты. Если вы используете коды форматирования на координатах, рекомендуется форматировать каждое значение отдельно во время использования данной опции (необязательно на 26.2)",
+
+  "solid-bar.modBar": "Локализация",
+  "solid-bar.modBar.description": "Кастомизируйте отображаемую информацию! Используйте &code для форматирования (minecraft.wiki/w/Formatting_codes) и {type.additional} для подставки значений (доступны на странице мода)",
+
+  "solid-bar.renderType": "Тип рендера",
+  "solid-bar.renderType.description": "Изменяет позицию рендера",
+
+  "solid-bar.defaultRenderIndentY": "Отступ по Y рендерера DEFAULT",
+  "solid-bar.defaultRenderIndentY.description": "Изменяет отступ по Y рендерера DEFAULT",
+
+  "solid-bar.renderIndentX": "Отступ по X",
+  "solid-bar.renderIndentX.description": "Изменяет отступ по X в других рендерерах (не DEFAULT)",
+
+  "solid-bar.renderIndentY": "Отступ по Y",
+  "solid-bar.renderIndentY.description": "Изменяет отступ по Y в других рендерерах (не DEFAULT)",
+
+  "key.category.solid-bar.keybinds": "Solid Bar",
+  "key.solid-bar.toggleModEnabled": "Вкл/Выкл мод",
+  "key.solid-bar.toggleStealthMode": "Вкл/Выкл режим стелса"
+}
