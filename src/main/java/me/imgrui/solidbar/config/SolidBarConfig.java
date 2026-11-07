@@ -1,4 +1,4 @@
-package me.imgrui.config;
+package me.imgrui.solidbar.config;
 
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;

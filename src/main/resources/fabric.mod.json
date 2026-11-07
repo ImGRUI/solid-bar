@@ -17,10 +17,10 @@
 	"environment": "client",
 	"entrypoints": {
 		"main": [
-			"me.imgrui.SolidBar"
+			"me.imgrui.solidbar.SolidBar"
 		],
 		"modmenu": [
-			"me.imgrui.config.ModMenuIntegration"
+			"me.imgrui.solidbar.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

@@ -1,8 +1,8 @@
-package me.imgrui.mixin;
+package me.imgrui.solidbar.mixin;
 
 import dev.isxander.yacl3.config.v2.impl.ConfigClassHandlerImpl;
-import me.imgrui.SolidBar;
-import me.imgrui.config.SolidBarConfig;
+import me.imgrui.solidbar.SolidBar;
+import me.imgrui.solidbar.config.SolidBarConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;

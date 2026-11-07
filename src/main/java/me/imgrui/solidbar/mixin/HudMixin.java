@@ -1,6 +1,6 @@
-package me.imgrui.mixin;
+package me.imgrui.solidbar.mixin;
 
-import me.imgrui.config.SolidBarConfig;
+import me.imgrui.solidbar.config.SolidBarConfig;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 //? >=26.2 {
@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import static me.imgrui.SolidBar.mc;
-import static me.imgrui.SolidBar.parseResult;
+import static me.imgrui.solidbar.SolidBar.mc;
+import static me.imgrui.solidbar.SolidBar.parseResult;
 
 //? >=26.2 {
 @Mixin(Hud.class)

@@ -1,12 +1,12 @@
-package me.imgrui.config.parser;
+package me.imgrui.solidbar.config.parser;
 
-import me.imgrui.config.SolidBarConfig;
+import me.imgrui.solidbar.config.SolidBarConfig;
 import net.minecraft.network.chat.Component;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-import static me.imgrui.SolidBar.mc;
+import static me.imgrui.solidbar.SolidBar.mc;
 
 public class Values {
 

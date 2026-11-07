@@ -1,4 +1,4 @@
-package me.imgrui.config.parser;
+package me.imgrui.solidbar.config.parser;
 
 import org.meteordev.starscript.Script;
 import org.meteordev.starscript.Section;

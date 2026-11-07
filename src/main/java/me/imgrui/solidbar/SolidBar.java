@@ -1,8 +1,8 @@
-package me.imgrui;
+package me.imgrui.solidbar;
 
 import com.mojang.blaze3d.platform.InputConstants;
-import me.imgrui.config.SolidBarConfig;
-import me.imgrui.config.parser.StarScript;
+import me.imgrui.solidbar.config.SolidBarConfig;
+import me.imgrui.solidbar.config.parser.StarScript;
 import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
