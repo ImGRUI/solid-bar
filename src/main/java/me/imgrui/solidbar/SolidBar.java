@@ -29,14 +29,14 @@ public class SolidBar implements ModInitializer {
 
 	KeyMapping.Category CATEGORY = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("solid-bar","keybinds"));
 	KeyMapping toggleModEnabled = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.solid-bar.toggleModEnabled",
-			//? 26.3 {
+			//? if 26.3 {
 			InputConstants.Type.KEYBOARD,
 			//?} else {
 			/*InputConstants.Type.KEYSYM,
 			 *///?}
 	InputConstants.KEY_RALT, CATEGORY));
 	KeyMapping toggleStealthMode = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.solid-bar.toggleStealthMode",
-			//? 26.3 {
+			//? if 26.3 {
 			InputConstants.Type.KEYBOARD,
 			//?} else {
 			/*InputConstants.Type.KEYSYM,
@@ -63,10 +63,6 @@ public class SolidBar implements ModInitializer {
 			if (modBarFormatted.isEmpty()) parseResult = "";
 			parseResult = ss.run(StarScript.compile(modBarFormatted));
 		});
-	}
-
-	public static Identifier id(String path) {
-		return Identifier.fromNamespaceAndPath(MOD_ID, path);
 	}
 
 	private void getModBarFormatted(String modBar) {
