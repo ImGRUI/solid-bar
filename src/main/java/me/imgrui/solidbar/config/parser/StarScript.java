@@ -19,6 +19,7 @@ public class StarScript {
         ss.set("general", new ValueMap()
                 .set("fps", () -> Value.number(Values.General.getFps()))
                 .set("time", () -> Value.string(Values.General.getTime()))
+                .set("time_seconds", () -> Value.string(Values.General.getTimeSeconds()))
         );
 
         ss.set("player", new ValueMap()
@@ -27,6 +28,7 @@ public class StarScript {
                 .set("health_percent", () -> Value.number(Values.Player.getHealthPercent()))
                 .set("armor", () -> Value.number(Values.Player.getArmor()))
                 .set("direction", () -> Value.string(Values.Player.getDirection()))
+                .set("direction_coords", () -> Value.string(Values.Player.getDirectionCoords()))
                 .set("hunger", () -> Value.number(Values.Player.getHunger()))
                 .set("ping", () -> Value.number(Values.Player.getPing()))
                 .set("pos", new ValueMap()

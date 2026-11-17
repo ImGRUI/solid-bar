@@ -1,1 +1,2 @@
 - Build script changes
+- Add time_seconds, direction_coords

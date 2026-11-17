@@ -14,12 +14,18 @@ public class Values {
 
         static DateFormat dateFormat = new SimpleDateFormat("HH:mm");
 
+        static DateFormat dateFormatSeconds = new SimpleDateFormat("HH:mm:ss");
+
         public static int getFps() {
             return mc.getFps();
         }
 
         public static String getTime() {
             return dateFormat.format(System.currentTimeMillis());
+        }
+
+        public static String getTimeSeconds() {
+            return dateFormatSeconds.format(System.currentTimeMillis());
         }
     }
 
@@ -51,6 +57,17 @@ public class Values {
                 case SOUTH -> "S";
                 case WEST -> "W";
                 case EAST -> "E";
+                default -> "?";
+            };
+        }
+
+        public static String getDirectionCoords() {
+            if (mc.player == null || SolidBarConfig.config().stealthMode) return "?";
+            return switch (mc.player.getDirection()) {
+                case NORTH -> "-Z";
+                case SOUTH -> "+Z";
+                case WEST -> "-X";
+                case EAST -> "+X";
                 default -> "?";
             };
         }
