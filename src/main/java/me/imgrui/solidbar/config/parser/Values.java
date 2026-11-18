@@ -84,17 +84,26 @@ public class Values {
 
         public static int getX() {
             if (mc.player == null || SolidBarConfig.config().stealthMode) return 0;
-            return (int) mc.player.getX();
+            return switch (SolidBarConfig.config().coordinateType) {
+                case INT -> (int) mc.player.getX();
+                case BLOCK -> mc.player.getBlockX();
+            };
         }
 
         public static int getY() {
             if (mc.player == null || SolidBarConfig.config().stealthMode) return 0;
-            return (int) mc.player.getY();
+            return switch (SolidBarConfig.config().coordinateType) {
+                case INT -> (int) mc.player.getY();
+                case BLOCK -> mc.player.getBlockY();
+            };
         }
 
         public static int getZ() {
             if (mc.player == null || SolidBarConfig.config().stealthMode) return 0;
-            return (int) mc.player.getZ();
+            return switch (SolidBarConfig.config().coordinateType) {
+                case INT -> (int) mc.player.getZ();
+                case BLOCK -> mc.player.getBlockZ();
+            };
         }
     }
 
@@ -142,17 +151,26 @@ public class Values {
 
         public static int getX() {
             if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
-            return (int) mc.crosshairPickEntity.getX();
+            return switch (SolidBarConfig.config().coordinateType) {
+                case INT -> (int) mc.crosshairPickEntity.getX();
+                case BLOCK -> mc.crosshairPickEntity.getBlockX();
+            };
         }
 
         public static int getY() {
             if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
-            return (int) mc.crosshairPickEntity.getY();
+            return switch (SolidBarConfig.config().coordinateType) {
+                case INT -> (int) mc.crosshairPickEntity.getY();
+                case BLOCK -> mc.crosshairPickEntity.getBlockY();
+            };
         }
 
         public static int getZ() {
             if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
-            return (int) mc.crosshairPickEntity.getZ();
+            return switch (SolidBarConfig.config().coordinateType) {
+                case INT -> (int) mc.crosshairPickEntity.getZ();
+                case BLOCK -> mc.crosshairPickEntity.getBlockZ();
+            };
         }
     }
 }

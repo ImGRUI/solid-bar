@@ -17,6 +17,9 @@
   "solid-bar.renderType": "Тип рендера",
   "solid-bar.renderType.description": "Изменяет позицию рендера",
 
+  "solid-bar.coordinateType": "Тип координат",
+  "solid-bar.coordinateType.description": "INT - берёт текущую координату и обрезает дробную часть числа, BLOCK - берёт координату блока",
+
   "solid-bar.defaultRenderIndentY": "Отступ по Y рендерера DEFAULT",
   "solid-bar.defaultRenderIndentY.description": "Изменяет отступ по Y рендерера DEFAULT",
 

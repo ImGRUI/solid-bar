@@ -40,12 +40,14 @@ Format: {type.add} {type.add.add2}
 - general
     - fps
     - time
+    - time_seconds
 - player
     - health
     - health_max
     - health_percent
     - armor
     - direction
+    - direction_coords
     - hunger
     - ping
     - pos

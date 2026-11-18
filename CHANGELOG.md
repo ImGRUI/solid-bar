@@ -1,2 +1,1 @@
-- Build script changes
-- Add time_seconds, direction_coords
+- Add coordinateType (default BLOCK), which changes how coordinates are calculated. This fixes negative coordinates

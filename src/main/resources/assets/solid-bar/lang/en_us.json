@@ -17,6 +17,9 @@
   "solid-bar.renderType": "Type of Renderer",
   "solid-bar.renderType.description": "Changes renderer position",
 
+  "solid-bar.coordinateType": "Coordinate Display Type",
+  "solid-bar.coordinateType.description": "INT - takes current coordinate and truncates the fractional part of the number, BLOCK - takes current block coordinate",
+
   "solid-bar.defaultRenderIndentY": "DEFAULT Render Y-axis Indent",
   "solid-bar.defaultRenderIndentY.description": "Changes the Y-axis indentation in the DEFAULT renderer",
 

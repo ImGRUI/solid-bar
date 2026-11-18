@@ -40,6 +40,14 @@ public class SolidBarConfig {
     }
 
     @SerialEntry
+    public coordinateTypeEnum coordinateType = coordinateTypeEnum.BLOCK;
+
+    public enum coordinateTypeEnum {
+        INT,
+        BLOCK
+    }
+
+    @SerialEntry
     public int defaultRenderIndentY = 85;
 
     @SerialEntry
@@ -76,6 +84,12 @@ public class SolidBarConfig {
                                 .description(OptionDescription.of(Component.translatable("solid-bar.renderType.description")))
                                 .binding(defaults.renderType, () -> config.renderType, (value) -> config.renderType = value)
                                 .customController(opt -> new EnumController<>(opt, SolidBarConfig.renderTypeEnum.class))
+                                .build()
+                        ).option(Option.<SolidBarConfig.coordinateTypeEnum>createBuilder()
+                                .name(Component.translatable("solid-bar.coordinateType"))
+                                .description(OptionDescription.of(Component.translatable("solid-bar.coordinateType.description")))
+                                .binding(defaults.coordinateType, () -> config.coordinateType, (value) -> config.coordinateType = value)
+                                .customController(opt -> new EnumController<>(opt, SolidBarConfig.coordinateTypeEnum.class))
                                 .build()
                         ).option(Option.<Integer>createBuilder()
                                 .name(Component.translatable("solid-bar.defaultRenderIndentY"))
