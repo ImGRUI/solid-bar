@@ -96,7 +96,7 @@ public class SolidBarConfig {
                                 .description(OptionDescription.of(Component.translatable("solid-bar.defaultRenderIndentY.description")))
                                 .binding(defaults.defaultRenderIndentY, () -> config.defaultRenderIndentY, (value) -> config.defaultRenderIndentY = value)
                                 .controller(opt -> IntegerSliderControllerBuilder.create(opt)
-                                        .range(0,100).step(1)
+                                        .range(0,150).step(1)
                                 )
                                 .build()
                         ).option(Option.<Integer>createBuilder()
