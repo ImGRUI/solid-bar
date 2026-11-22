@@ -51,8 +51,8 @@ public class Values {
         }
 
         public static String getDirection() {
-            if (mc.player == null || SolidBarConfig.config().stealthMode) return "?";
-            return switch (mc.player.getDirection()) {
+            if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return "?";
+            return switch (mc.getCameraEntity().getDirection()) {
                 case NORTH -> "N";
                 case SOUTH -> "S";
                 case WEST -> "W";
@@ -62,8 +62,8 @@ public class Values {
         }
 
         public static String getDirectionCoords() {
-            if (mc.player == null || SolidBarConfig.config().stealthMode) return "?";
-            return switch (mc.player.getDirection()) {
+            if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return "?";
+            return switch (mc.getCameraEntity().getDirection()) {
                 case NORTH -> "-Z";
                 case SOUTH -> "+Z";
                 case WEST -> "-X";
@@ -83,26 +83,26 @@ public class Values {
         }
 
         public static int getX() {
-            if (mc.player == null || SolidBarConfig.config().stealthMode) return 0;
+            if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
             return switch (SolidBarConfig.config().coordinateType) {
-                case INT -> (int) mc.player.getX();
-                case BLOCK -> mc.player.getBlockX();
+                case BLOCK -> mc.getCameraEntity().getBlockX();
+                case INT -> (int) mc.getCameraEntity().getX();
             };
         }
 
         public static int getY() {
-            if (mc.player == null || SolidBarConfig.config().stealthMode) return 0;
+            if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
             return switch (SolidBarConfig.config().coordinateType) {
-                case INT -> (int) mc.player.getY();
-                case BLOCK -> mc.player.getBlockY();
+                case BLOCK -> mc.getCameraEntity().getBlockY();
+                case INT -> (int) mc.getCameraEntity().getY();
             };
         }
 
         public static int getZ() {
-            if (mc.player == null || SolidBarConfig.config().stealthMode) return 0;
+            if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
             return switch (SolidBarConfig.config().coordinateType) {
-                case INT -> (int) mc.player.getZ();
-                case BLOCK -> mc.player.getBlockZ();
+                case BLOCK -> mc.getCameraEntity().getBlockZ();
+                case INT -> (int) mc.getCameraEntity().getZ();
             };
         }
     }

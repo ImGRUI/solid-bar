@@ -1,1 +1,2 @@
-- Add coordinateType (default BLOCK), which changes how coordinates are calculated. This fixes negative coordinates
+- Increase Y indent limit in DEFAULT render
+- Fix coordinates/direction in freecam
