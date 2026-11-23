@@ -14,11 +14,11 @@
   "solid-bar.modBar": "Bar Localization",
   "solid-bar.modBar.description": "Customize your info! Use &code to format (minecraft.wiki/w/Formatting_codes) and {type.additional} to paste values (check them on mod page)",
 
+  "solid-bar.timeFormat": "Time Format",
+  "solid-bar.timeFormat.description": "Changes how real time (general.time) is formatted, check SimpleDateFormat documentation",
+
   "solid-bar.renderType": "Type of Renderer",
   "solid-bar.renderType.description": "Changes renderer position",
-
-  "solid-bar.coordinateType": "Coordinate Display Type",
-  "solid-bar.coordinateType.description": "INT - takes current coordinate and truncates the fractional part of the number, BLOCK - takes current block coordinate",
 
   "solid-bar.defaultRenderIndentY": "DEFAULT Render Y-axis Indent",
   "solid-bar.defaultRenderIndentY.description": "Changes the Y-axis indentation in the DEFAULT renderer",

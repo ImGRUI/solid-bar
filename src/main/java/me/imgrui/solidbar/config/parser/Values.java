@@ -2,6 +2,12 @@ package me.imgrui.solidbar.config.parser;
 
 import me.imgrui.solidbar.config.SolidBarConfig;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.Mth;
+import net.minecraft.util.Util;
+import net.minecraft.world.clock.ClockManager;
+import net.minecraft.world.timeline.Timelines;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -11,25 +17,21 @@ import static me.imgrui.solidbar.SolidBar.mc;
 public class Values {
 
     public static class General {
-
-        static DateFormat dateFormat = new SimpleDateFormat("HH:mm");
-
-        static DateFormat dateFormatSeconds = new SimpleDateFormat("HH:mm:ss");
-
         public static int getFps() {
             return mc.getFps();
         }
 
         public static String getTime() {
+            DateFormat dateFormat = new SimpleDateFormat(SolidBarConfig.config().timeFormat);
             return dateFormat.format(System.currentTimeMillis());
-        }
-
-        public static String getTimeSeconds() {
-            return dateFormatSeconds.format(System.currentTimeMillis());
         }
     }
 
     public static class Player {
+        public static String getName() {
+            return mc.getUser().getName();
+        }
+
         public static double getHealth() {
             if (mc.player == null) return 0;
             return Math.round(mc.player.getHealth() * 10) / 10.0;
@@ -84,26 +86,80 @@ public class Values {
 
         public static int getX() {
             if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
-            return switch (SolidBarConfig.config().coordinateType) {
-                case BLOCK -> mc.getCameraEntity().getBlockX();
-                case INT -> (int) mc.getCameraEntity().getX();
-            };
+            return mc.getCameraEntity().getBlockX();
         }
 
         public static int getY() {
             if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
-            return switch (SolidBarConfig.config().coordinateType) {
-                case BLOCK -> mc.getCameraEntity().getBlockY();
-                case INT -> (int) mc.getCameraEntity().getY();
-            };
+            return mc.getCameraEntity().getBlockY();
         }
 
         public static int getZ() {
             if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
-            return switch (SolidBarConfig.config().coordinateType) {
-                case BLOCK -> mc.getCameraEntity().getBlockZ();
-                case INT -> (int) mc.getCameraEntity().getZ();
+            return mc.getCameraEntity().getBlockZ();
+        }
+
+        public static String getChunkX() {
+            if (mc.getCameraEntity() == null) return "0";
+            return String.format("%02d", mc.getCameraEntity().getBlockX() & 15);
+        }
+
+        public static String getChunkY() {
+            if (mc.getCameraEntity() == null) return "0";
+            return String.format("%02d", mc.getCameraEntity().getBlockY() & 15);
+        }
+
+        public static String getChunkZ() {
+            if (mc.getCameraEntity() == null) return "0";
+            return String.format("%02d", mc.getCameraEntity().getBlockZ() & 15);
+        }
+
+        public static int getConvertX() {
+            if (mc.level == null || mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
+            return switch (mc.level.dimension().identifier().toLanguageKey()) {
+                case "minecraft.overworld" -> mc.getCameraEntity().getBlockX() / 8;
+                case "minecraft.the_nether" -> mc.getCameraEntity().getBlockX() * 8;
+                default -> 0;
             };
+        }
+
+        public static int getConvertZ() {
+            if (mc.level == null || mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return 0;
+            return switch (mc.level.dimension().identifier().toLanguageKey()) {
+                case "minecraft.overworld" -> mc.getCameraEntity().getBlockZ() / 8;
+                case "minecraft.the_nether" -> mc.getCameraEntity().getBlockZ() * 8;
+                default -> 0;
+            };
+        }
+
+        public static String getHorizontalMeterSpeed() {
+            if (mc.getCameraEntity() == null) return "0.0";
+            return String.format("%.1f", mc.getCameraEntity().getKnownSpeed().horizontal().length() * 20);
+        }
+
+        public static String getHorizontalKilometerSpeed() {
+            if (mc.getCameraEntity() == null) return "0.0";
+            return String.format("%.1f", mc.getCameraEntity().getKnownSpeed().horizontal().length() * 20 * 3.6);
+        }
+
+        public static String getMeterSpeed() {
+            if (mc.getCameraEntity() == null) return "0.0";
+            return String.format("%.1f", mc.getCameraEntity().getKnownSpeed().length() * 20);
+        }
+
+        public static String getKilometerSpeed() {
+            if (mc.getCameraEntity() == null) return "0.0";
+            return String.format("%.1f", mc.getCameraEntity().getKnownSpeed().length() * 20 * 3.6);
+        }
+
+        public static String getYaw() {
+            if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return "0.0";
+            return String.format("%.1f", Mth.wrapDegrees(mc.getCameraEntity().getYRot()));
+        }
+
+        public static String getPitch() {
+            if (mc.getCameraEntity() == null || SolidBarConfig.config().stealthMode) return "0.0";
+            return String.format("%.1f", Mth.wrapDegrees(mc.getCameraEntity().getXRot()));
         }
     }
 
@@ -125,6 +181,21 @@ public class Values {
             int hours = (int) ((gameDayTime / 1000) % 24);
             int minutes = (int) ((gameDayTime % 1000) * 60 / 1000);
             return String.format("%02d:%02d", hours, minutes);
+        }
+
+        public static String getBiome() {
+            if (mc.level == null || mc.getCameraEntity() == null) return "";
+            Identifier identifier = mc.level.getBiome(mc.getCameraEntity().getOnPos()).unwrapKey().map(ResourceKey::identifier).orElse(null);
+            if (identifier != null) {
+                return Component.translatable(Util.makeDescriptionId("biome", identifier)).getString();
+            }
+            return null;
+        }
+
+        public static int getDays() {
+            if (mc.level == null) return 0;
+            ClockManager clockManager = mc.level.clockManager();
+            return mc.level.registryAccess().get(Timelines.OVERWORLD_DAY).map(timeline -> timeline.value().getPeriodCount(clockManager)).orElse(0);
         }
     }
 
@@ -149,28 +220,116 @@ public class Values {
             return Math.round(mc.crosshairPickEntity.asLivingEntity().getHealth() * 100 / mc.crosshairPickEntity.asLivingEntity().getMaxHealth() * 10) / 10.0;
         }
 
+        public static String getDirection() {
+            if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return "?";
+            return switch (mc.crosshairPickEntity.getDirection()) {
+                case NORTH -> "N";
+                case SOUTH -> "S";
+                case WEST -> "W";
+                case EAST -> "E";
+                default -> "?";
+            };
+        }
+
+        public static String getDirectionCoords() {
+            if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return "?";
+            return switch (mc.crosshairPickEntity.getDirection()) {
+                case NORTH -> "-Z";
+                case SOUTH -> "+Z";
+                case WEST -> "-X";
+                case EAST -> "+X";
+                default -> "?";
+            };
+        }
+
         public static int getX() {
             if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
-            return switch (SolidBarConfig.config().coordinateType) {
-                case INT -> (int) mc.crosshairPickEntity.getX();
-                case BLOCK -> mc.crosshairPickEntity.getBlockX();
-            };
+            return mc.crosshairPickEntity.getBlockX();
         }
 
         public static int getY() {
             if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
-            return switch (SolidBarConfig.config().coordinateType) {
-                case INT -> (int) mc.crosshairPickEntity.getY();
-                case BLOCK -> mc.crosshairPickEntity.getBlockY();
-            };
+            return mc.crosshairPickEntity.getBlockY();
         }
 
         public static int getZ() {
             if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
-            return switch (SolidBarConfig.config().coordinateType) {
-                case INT -> (int) mc.crosshairPickEntity.getZ();
-                case BLOCK -> mc.crosshairPickEntity.getBlockZ();
+            return mc.crosshairPickEntity.getBlockZ();
+        }
+
+        public static String getChunkX() {
+            if (mc.crosshairPickEntity == null) return "0";
+            return String.format("%02d", mc.crosshairPickEntity.getBlockX() & 15);
+        }
+
+        public static String getChunkY() {
+            if (mc.crosshairPickEntity == null) return "0";
+            return String.format("%02d", mc.crosshairPickEntity.getBlockY() & 15);
+        }
+
+        public static String getChunkZ() {
+            if (mc.crosshairPickEntity == null) return "0";
+            return String.format("%02d", mc.crosshairPickEntity.getBlockZ() & 15);
+        }
+
+        public static int getConvertX() {
+            if (mc.level == null || mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
+            return switch (mc.level.dimension().identifier().toLanguageKey()) {
+                case "minecraft.overworld" -> mc.crosshairPickEntity.getBlockX() / 8;
+                case "minecraft.the_nether" -> mc.crosshairPickEntity.getBlockX() * 8;
+                default -> 0;
             };
+        }
+
+        public static int getConvertZ() {
+            if (mc.level == null || mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return 0;
+            return switch (mc.level.dimension().identifier().toLanguageKey()) {
+                case "minecraft.overworld" -> mc.crosshairPickEntity.getBlockZ() / 8;
+                case "minecraft.the_nether" -> mc.crosshairPickEntity.getBlockZ() * 8;
+                default -> 0;
+            };
+        }
+
+        public static String getHorizontalMeterSpeed() {
+            if (mc.crosshairPickEntity == null) return "0.0";
+            return String.format("%.1f", mc.crosshairPickEntity.getKnownSpeed().horizontal().length() * 20);
+        }
+
+        public static String getHorizontalKilometerSpeed() {
+            if (mc.crosshairPickEntity == null) return "0.0";
+            return String.format("%.1f", mc.crosshairPickEntity.getKnownSpeed().horizontal().length() * 20 * 3.6);
+        }
+
+        public static String getMeterSpeed() {
+            if (mc.crosshairPickEntity == null) return "0.0";
+            return String.format("%.1f", mc.crosshairPickEntity.getKnownSpeed().length() * 20);
+        }
+
+        public static String getKilometerSpeed() {
+            if (mc.crosshairPickEntity == null) return "0.0";
+            return String.format("%.1f", mc.crosshairPickEntity.getKnownSpeed().length() * 20 * 3.6);
+        }
+
+        public static String getYaw() {
+            if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return "0.0";
+            return String.format("%.1f", Mth.wrapDegrees(mc.crosshairPickEntity.getYRot()));
+        }
+
+        public static String getPitch() {
+            if (mc.crosshairPickEntity == null || SolidBarConfig.config().stealthMode) return "0.0";
+            return String.format("%.1f", Mth.wrapDegrees(mc.crosshairPickEntity.getXRot()));
+        }
+    }
+
+    public static class Server {
+        public static String getIp() {
+            if (mc.player == null || mc.player.connection.getServerData() == null) return "";
+            return mc.player.connection.getServerData().ip;
+        }
+
+        public static String getName() {
+            if (mc.player == null || mc.player.connection.getServerData() == null) return "";
+            return mc.player.connection.getServerData().name;
         }
     }
 }

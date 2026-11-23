@@ -1,2 +1,7 @@
 - Increase Y indent limit in DEFAULT render
 - Fix coordinates/direction in freecam
+- Removed coordinateType
+- Added biome, days, chunk pos, convert pos (nether/overworld coords), speed, rotation, server ip/name
+- Added direction for entity
+- Removed time_seconds in favor of custom time format
+- Renamed direction_coords to direction_towards

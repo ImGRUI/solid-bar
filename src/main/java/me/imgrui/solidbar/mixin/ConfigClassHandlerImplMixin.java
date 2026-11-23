@@ -26,7 +26,7 @@ public abstract class ConfigClassHandlerImplMixin {
         // Due to text changing position while stealth is enabled
         //? if !26.2 {
         if (SolidBarConfig.config().stealthMode) {
-            Pattern stealthPattern = Pattern.compile("\\{(player|entity)\\.pos\\.[xyz]}");
+            Pattern stealthPattern = Pattern.compile("\\{(player|entity)\\.(pos|convert|yaw|pitch)(\\.[xyz])?}");
             modBar = stealthPattern.matcher(modBar).replaceAll(mr -> "&k" + mr.group() + "&r");
         }
         //?}

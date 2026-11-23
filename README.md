@@ -38,33 +38,72 @@ Accessible via Mod Menu.
 Format: {type.add} {type.add.add2}
 
 - general
-    - fps
-    - time
-    - time_seconds
+  - fps
+  - time
 - player
-    - health
-    - health_max
-    - health_percent
-    - armor
-    - direction
-    - direction_coords
-    - hunger
-    - ping
-    - pos
-        - x
-        - y
-        - z
+  - name
+  - health
+  - health_max
+  - health_percent
+  - armor
+  - direction
+  - direction_towards
+  - hunger
+  - ping
+  - pos
+    - x
+    - y
+    - z
+  - chunk
+    - x
+    - y
+    - z
+  - convert (nether/overworld)
+    - x
+    - z
+  - speed
+    - horizontal
+      - ms
+      - kmh
+    - all (3d)
+      - ms
+      - kmh
+  - yaw
+  - pitch
 - world
-    - time
-    - dimension
+  - time
+  - dimension
+  - biome
+  - days
 - entity
-    - name
-    - health
-    - health_max
-    - health_percent
-    - pos
-      - x
-      - y
-      - z
+  - name
+  - health
+  - health_max
+  - health_percent
+  - direction
+  - direction_towards
+  - pos
+    - x
+    - y
+    - z
+  - chunk
+    - x
+    - y
+    - z
+  - convert (nether/overworld)
+    - x
+    - z
+  - speed
+    - horizontal
+      - ms
+      - kmh
+    - all (3d)
+      - ms
+      - kmh
+  - yaw
+  - pitch
+- server
+  - ip
+  - name
 
 </details>

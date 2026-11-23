@@ -29,6 +29,9 @@ public class SolidBarConfig {
     public String modBar = "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction} {world.time}&r";
 
     @SerialEntry
+    public String timeFormat = "HH:mm";
+
+    @SerialEntry
     public renderTypeEnum renderType = renderTypeEnum.DEFAULT;
 
     public enum renderTypeEnum {
@@ -37,14 +40,6 @@ public class SolidBarConfig {
         TOP_RIGHT,
         BOTTOM_LEFT,
         BOTTOM_RIGHT
-    }
-
-    @SerialEntry
-    public coordinateTypeEnum coordinateType = coordinateTypeEnum.BLOCK;
-
-    public enum coordinateTypeEnum {
-        INT,
-        BLOCK
     }
 
     @SerialEntry
@@ -79,17 +74,17 @@ public class SolidBarConfig {
                                 .binding(defaults.modBar, () -> config.modBar, (value) -> config.modBar = value)
                                 .customController(StringController::new)
                                 .build()
+                        ).option(Option.<String>createBuilder()
+                                .name(Component.translatable("solid-bar.timeFormat"))
+                                .description(OptionDescription.of(Component.translatable("solid-bar.timeFormat.description")))
+                                .binding(defaults.timeFormat, () -> config.timeFormat, (value) -> config.timeFormat = value)
+                                .customController(StringController::new)
+                                .build()
                         ).option(Option.<SolidBarConfig.renderTypeEnum>createBuilder()
                                 .name(Component.translatable("solid-bar.renderType"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.renderType.description")))
                                 .binding(defaults.renderType, () -> config.renderType, (value) -> config.renderType = value)
                                 .customController(opt -> new EnumController<>(opt, SolidBarConfig.renderTypeEnum.class))
-                                .build()
-                        ).option(Option.<SolidBarConfig.coordinateTypeEnum>createBuilder()
-                                .name(Component.translatable("solid-bar.coordinateType"))
-                                .description(OptionDescription.of(Component.translatable("solid-bar.coordinateType.description")))
-                                .binding(defaults.coordinateType, () -> config.coordinateType, (value) -> config.coordinateType = value)
-                                .customController(opt -> new EnumController<>(opt, SolidBarConfig.coordinateTypeEnum.class))
                                 .build()
                         ).option(Option.<Integer>createBuilder()
                                 .name(Component.translatable("solid-bar.defaultRenderIndentY"))
