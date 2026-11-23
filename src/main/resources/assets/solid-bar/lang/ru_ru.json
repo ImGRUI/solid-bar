@@ -5,6 +5,12 @@
   "solid-bar.world.the_nether": "Незер",
   "solid-bar.world.the_end": "Энд",
 
+  "solid-bar.weather.clear": "Ясно",
+  "solid-bar.weather.rain": "Дождь",
+  "solid-bar.weather.thunder": "Гроза",
+  "solid-bar.weather.snow": "Снег",
+  "solid-bar.weather.thunder_snow": "Гроза со снегом",
+
   "solid-bar.modEnabled": "Включить Solid Bar",
   "solid-bar.modEnabled.description": "Вкл/Выкл мод",
 

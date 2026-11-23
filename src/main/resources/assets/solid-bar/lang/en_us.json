@@ -5,6 +5,12 @@
   "solid-bar.world.the_nether": "The Nether",
   "solid-bar.world.the_end": "The End",
 
+  "solid-bar.weather.clear": "Clear",
+  "solid-bar.weather.rain": "Rain",
+  "solid-bar.weather.thunder": "Thunder",
+  "solid-bar.weather.snow": "Snow",
+  "solid-bar.weather.thunder_snow": "Thunder with snow",
+
   "solid-bar.modEnabled": "Enabled",
   "solid-bar.modEnabled.description": "Mod toggle",
 

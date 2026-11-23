@@ -64,6 +64,10 @@ public class StarScript {
                 .set("time", () -> Value.string(Values.World.getTime()))
                 .set("biome", () -> Value.string(Values.World.getBiome()))
                 .set("days", () -> Value.number(Values.World.getDays()))
+                .set("weather", new ValueMap()
+                        .set("global", () -> Value.string(Values.World.getGlobalWeather()))
+                        .set("local", () -> Value.string(Values.World.getLocalWeather()))
+                )
         );
 
         ss.set("entity", new ValueMap()

@@ -1,12 +1,14 @@
 package me.imgrui.solidbar.config.parser;
 
 import me.imgrui.solidbar.config.SolidBarConfig;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.util.Util;
 import net.minecraft.world.clock.ClockManager;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.timeline.Timelines;
 
 import java.text.DateFormat;
@@ -196,6 +198,30 @@ public class Values {
             if (mc.level == null) return 0;
             ClockManager clockManager = mc.level.clockManager();
             return mc.level.registryAccess().get(Timelines.OVERWORLD_DAY).map(timeline -> timeline.value().getPeriodCount(clockManager)).orElse(0);
+        }
+
+        public static String getGlobalWeather() {
+            if (mc.level == null) return "";
+            if (mc.level.isThundering()) {
+                return Component.translatable("solid-bar.weather.thunder").getString();
+            } else if (mc.level.isRaining()) {
+                return Component.translatable("solid-bar.weather.rain").getString();
+            } else {
+                return Component.translatable("solid-bar.weather.clear").getString();
+            }
+        }
+
+        public static String getLocalWeather() {
+            if (mc.level == null || mc.getCameraEntity() == null) return "";
+            BlockPos blockPos = mc.getCameraEntity().getOnPos();
+            Biome biome = mc.level.getBiome(blockPos).value();
+            if (mc.level.isThundering()) {
+                return biome.coldEnoughToSnow(blockPos, blockPos.getY()) ? Component.translatable("solid-bar.weather.thunder_snow").getString() : Component.translatable("solid-bar.weather.thunder").getString();
+            } else if (mc.level.isRaining()) {
+                return biome.coldEnoughToSnow(blockPos, blockPos.getY()) ? Component.translatable("solid-bar.weather.snow").getString() : Component.translatable("solid-bar.weather.rain").getString();
+            } else {
+                return Component.translatable("solid-bar.weather.clear").getString();
+            }
         }
     }
 

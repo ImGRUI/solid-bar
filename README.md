@@ -75,6 +75,9 @@ Format: {type.add} {type.add.add2}
   - dimension
   - biome
   - days
+  - weather
+    - global
+    - local
 - entity
   - name
   - health
