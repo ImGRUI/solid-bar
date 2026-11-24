@@ -101,17 +101,17 @@ public class Values {
             return mc.getCameraEntity().getBlockZ();
         }
 
-        public static String getChunkX() {
+        public static String getSectionX() {
             if (mc.getCameraEntity() == null) return "0";
             return String.format("%02d", mc.getCameraEntity().getBlockX() & 15);
         }
 
-        public static String getChunkY() {
+        public static String getSectionY() {
             if (mc.getCameraEntity() == null) return "0";
             return String.format("%02d", mc.getCameraEntity().getBlockY() & 15);
         }
 
-        public static String getChunkZ() {
+        public static String getSectionZ() {
             if (mc.getCameraEntity() == null) return "0";
             return String.format("%02d", mc.getCameraEntity().getBlockZ() & 15);
         }
@@ -283,17 +283,17 @@ public class Values {
             return mc.crosshairPickEntity.getBlockZ();
         }
 
-        public static String getChunkX() {
+        public static String getSectionX() {
             if (mc.crosshairPickEntity == null) return "0";
             return String.format("%02d", mc.crosshairPickEntity.getBlockX() & 15);
         }
 
-        public static String getChunkY() {
+        public static String getSectionY() {
             if (mc.crosshairPickEntity == null) return "0";
             return String.format("%02d", mc.crosshairPickEntity.getBlockY() & 15);
         }
 
-        public static String getChunkZ() {
+        public static String getSectionZ() {
             if (mc.crosshairPickEntity == null) return "0";
             return String.format("%02d", mc.crosshairPickEntity.getBlockZ() & 15);
         }

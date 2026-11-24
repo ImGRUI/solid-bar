@@ -54,7 +54,7 @@ Format: {type.add} {type.add.add2}
     - x
     - y
     - z
-  - chunk
+  - section
     - x
     - y
     - z
@@ -89,7 +89,7 @@ Format: {type.add} {type.add.add2}
     - x
     - y
     - z
-  - chunk
+  - section
     - x
     - y
     - z
