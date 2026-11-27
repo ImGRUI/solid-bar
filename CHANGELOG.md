@@ -1,2 +1,2 @@
-- Add world.weather
-- Rename chunk to section
+- Add bar profiles
+- Keybinds are now disabled when mod is not enabled

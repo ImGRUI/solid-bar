@@ -2,15 +2,20 @@ package me.imgrui.solidbar.config;
 
 import dev.isxander.yacl3.api.*;
 import dev.isxander.yacl3.api.controller.IntegerSliderControllerBuilder;
+import dev.isxander.yacl3.api.controller.StringControllerBuilder;
 import dev.isxander.yacl3.api.controller.TickBoxControllerBuilder;
 import dev.isxander.yacl3.config.v2.api.ConfigClassHandler;
 import dev.isxander.yacl3.config.v2.api.SerialEntry;
 import dev.isxander.yacl3.config.v2.api.serializer.GsonConfigSerializerBuilder;
 import dev.isxander.yacl3.gui.controllers.cycling.EnumController;
 import dev.isxander.yacl3.gui.controllers.string.StringController;
+import dev.isxander.yacl3.gui.controllers.string.number.IntegerFieldController;
 import dev.isxander.yacl3.platform.YACLPlatform;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SolidBarConfig {
     public static final ConfigClassHandler<SolidBarConfig> CONFIG = ConfigClassHandler.createBuilder(SolidBarConfig.class)
@@ -27,6 +32,15 @@ public class SolidBarConfig {
 
     @SerialEntry
     public String modBar = "&6XYZ:&r {player.pos.x} {player.pos.y} {player.pos.z} &6{player.direction} {world.time}&r";
+
+    @SerialEntry
+    public boolean barProfilesEnabled = false;
+
+    @SerialEntry
+    public int barProfileNumber = 0;
+
+    @SerialEntry
+    public List<String> barProfiles = new ArrayList<>();
 
     @SerialEntry
     public String timeFormat = "HH:mm";
@@ -55,38 +69,43 @@ public class SolidBarConfig {
         return YetAnotherConfigLib.create(CONFIG, (defaults, config, builder) -> builder
                 .title(Component.translatable("solid-bar"))
                 .category(ConfigCategory.createBuilder()
-                        .name(Component.translatable("solid-bar"))
+                        .name(Component.translatable("solid-bar.category.general"))
                         .option(Option.<Boolean>createBuilder()
                                 .name(Component.translatable("solid-bar.modEnabled"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.modEnabled.description")))
                                 .binding(defaults.modEnabled, () -> config.modEnabled, (value) -> config.modEnabled = value)
                                 .controller(TickBoxControllerBuilder::create)
                                 .build()
-                        ).option(Option.<Boolean>createBuilder()
+                        )
+                        .option(Option.<Boolean>createBuilder()
                                 .name(Component.translatable("solid-bar.stealthMode"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.stealthMode.description")))
                                 .binding(defaults.stealthMode, () -> config.stealthMode, (value) -> config.stealthMode = value)
                                 .controller(TickBoxControllerBuilder::create)
                                 .build()
-                        ).option(Option.<String>createBuilder()
+                        )
+                        .option(Option.<String>createBuilder()
                                 .name(Component.translatable("solid-bar.modBar"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.modBar.description")))
                                 .binding(defaults.modBar, () -> config.modBar, (value) -> config.modBar = value)
                                 .customController(StringController::new)
                                 .build()
-                        ).option(Option.<String>createBuilder()
+                        )
+                        .option(Option.<String>createBuilder()
                                 .name(Component.translatable("solid-bar.timeFormat"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.timeFormat.description")))
                                 .binding(defaults.timeFormat, () -> config.timeFormat, (value) -> config.timeFormat = value)
                                 .customController(StringController::new)
                                 .build()
-                        ).option(Option.<SolidBarConfig.renderTypeEnum>createBuilder()
+                        )
+                        .option(Option.<renderTypeEnum>createBuilder()
                                 .name(Component.translatable("solid-bar.renderType"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.renderType.description")))
                                 .binding(defaults.renderType, () -> config.renderType, (value) -> config.renderType = value)
-                                .customController(opt -> new EnumController<>(opt, SolidBarConfig.renderTypeEnum.class))
+                                .customController(opt -> new EnumController<>(opt, renderTypeEnum.class))
                                 .build()
-                        ).option(Option.<Integer>createBuilder()
+                        )
+                        .option(Option.<Integer>createBuilder()
                                 .name(Component.translatable("solid-bar.defaultRenderIndentY"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.defaultRenderIndentY.description")))
                                 .binding(defaults.defaultRenderIndentY, () -> config.defaultRenderIndentY, (value) -> config.defaultRenderIndentY = value)
@@ -94,7 +113,8 @@ public class SolidBarConfig {
                                         .range(0,150).step(1)
                                 )
                                 .build()
-                        ).option(Option.<Integer>createBuilder()
+                        )
+                        .option(Option.<Integer>createBuilder()
                                 .name(Component.translatable("solid-bar.renderIndentX"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.renderIndentX.description")))
                                 .binding(defaults.renderIndentX, () -> config.renderIndentX, (value) -> config.renderIndentX = value)
@@ -102,13 +122,39 @@ public class SolidBarConfig {
                                         .range(0,100).step(1)
                                 )
                                 .build()
-                        ).option(Option.<Integer>createBuilder()
+                        )
+                        .option(Option.<Integer>createBuilder()
                                 .name(Component.translatable("solid-bar.renderIndentY"))
                                 .description(OptionDescription.of(Component.translatable("solid-bar.renderIndentY.description")))
                                 .binding(defaults.renderIndentY, () -> config.renderIndentY, (value) -> config.renderIndentY = value)
                                 .controller(opt -> IntegerSliderControllerBuilder.create(opt)
                                         .range(0,100).step(1)
                                 )
+                                .build()
+                        )
+                        .build()
+                )
+                .category(ConfigCategory.createBuilder()
+                        .name(Component.translatable("solid-bar.category.barProfiles"))
+                        .option(Option.<Boolean>createBuilder()
+                                .name(Component.translatable("solid-bar.barProfilesEnabled"))
+                                .description(OptionDescription.of(Component.translatable("solid-bar.barProfilesEnabled.description")))
+                                .binding(defaults.barProfilesEnabled, () -> config.barProfilesEnabled, (value) -> config.barProfilesEnabled = value)
+                                .controller(TickBoxControllerBuilder::create)
+                                .build()
+                        )
+                        .option(Option.<Integer>createBuilder()
+                                .name(Component.translatable("solid-bar.barProfileNumber"))
+                                .description(OptionDescription.of(Component.translatable("solid-bar.barProfileNumber.description")))
+                                .binding(defaults.barProfileNumber, () -> config.barProfileNumber, (value) -> config.barProfileNumber = value)
+                                .customController(IntegerFieldController::new)
+                                .build()
+                        )
+                        .group(ListOption.<String>createBuilder()
+                                .name(Component.translatable("solid-bar.barProfiles"))
+                                .binding(defaults.barProfiles, () -> config.barProfiles, (value) -> config.barProfiles = value)
+                                .controller(StringControllerBuilder::create)
+                                .initial("")
                                 .build()
                         )
                         .build()

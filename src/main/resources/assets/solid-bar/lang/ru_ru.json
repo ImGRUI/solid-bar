@@ -1,5 +1,6 @@
 {
   "solid-bar": "Solid Bar",
+  "solid-bar.category.general": "Основные",
 
   "solid-bar.world.overworld": "Верхний мир",
   "solid-bar.world.the_nether": "Незер",
@@ -37,5 +38,19 @@
 
   "key.category.solid-bar.keybinds": "Solid Bar",
   "key.solid-bar.toggleModEnabled": "Вкл/Выкл мод",
-  "key.solid-bar.toggleStealthMode": "Вкл/Выкл режим стелса"
+  "key.solid-bar.toggleStealthMode": "Вкл/Выкл режим стелса",
+  "key.solid-bar.nextBarProfile": "Следующий профиль",
+  "key.solid-bar.prevBarProfile": "Предыдущий профиль",
+  "key.solid-bar.randomBarProfile": "Рандомный профиль",
+  "key.solid-bar.resetBarProfile": "Первый профиль",
+
+  "solid-bar.category.barProfiles": "Профили",
+
+  "solid-bar.barProfilesEnabled": "Включить профили",
+  "solid-bar.barProfilesEnabled.description": "Включает профили, с помощью которых можно переключаться между пресетами. Изменяйте список ниже",
+
+  "solid-bar.barProfileNumber": "Номер профиля",
+  "solid-bar.barProfileNumber.description": "Номер текущего профиля, начинающийся с 0 и заканчивающийся размером списка - 1. Доступно изменение биндами",
+
+  "solid-bar.barProfiles": "Список профилей"
 }

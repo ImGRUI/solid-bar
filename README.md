@@ -22,13 +22,23 @@ Inspired by [Action Bar Info](https://modrinth.com/mod/abi).
 
 Accessible via Mod Menu.
 
-![Configuration](https://cdn.modrinth.com/data/cached_images/3a1169ccca9511493978dbc1dbfe3fe65586ab8e_0.webp)
+![General tab](https://cdn.modrinth.com/data/cached_images/d192663935aaa802a6b03238c8fa9142e67c9b2f.png)
+![Bar Profiles tab](https://cdn.modrinth.com/data/cached_images/fb2fdcaf689a15cf9eeaa16835dde069dcfeb3dd_0.webp)
 
 </details>
 
-### Keybinds
+## Keybinds
+
+### General
 - **Mod toggle**: Right ALT
 - **Toggle Stealth Mode**: Not Bound
+
+### Profiles (0.1.6+)
+
+- **First Bar Profile**: Not Bound
+- **Next Bar Profile**: Not Bound
+- **Previous Bar Profile**: Not Bound
+- **Random Bar Profile**: Not Bound
 
 <hr>
 

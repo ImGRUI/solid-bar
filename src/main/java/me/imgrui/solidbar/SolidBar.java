@@ -14,9 +14,7 @@ import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//? if !26.2 {
-import java.util.regex.Pattern;
-//?}
+import java.util.Random;
 
 public class SolidBar implements ModInitializer {
 	public static final String MOD_ID = "solid-bar";
@@ -26,6 +24,8 @@ public class SolidBar implements ModInitializer {
 
 	public static String modBarFormatted;
 	public static String parseResult;
+
+	private static final Random random = new Random();
 
 	KeyMapping.Category CATEGORY = KeyMapping.Category.register(Identifier.fromNamespaceAndPath("solid-bar","keybinds"));
 	KeyMapping toggleModEnabled = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.solid-bar.toggleModEnabled",
@@ -42,12 +42,39 @@ public class SolidBar implements ModInitializer {
 			/*InputConstants.Type.KEYSYM,
 			 *///?}
 	InputConstants.UNKNOWN.getValue(), CATEGORY));
+	KeyMapping randomBarProfile = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.solid-bar.randomBarProfile",
+			//? if 26.3 {
+			InputConstants.Type.KEYBOARD,
+			//?} else {
+			/*InputConstants.Type.KEYSYM,
+			 *///?}
+	InputConstants.UNKNOWN.getValue(), CATEGORY));
+	KeyMapping nextBarProfile = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.solid-bar.nextBarProfile",
+			//? if 26.3 {
+			InputConstants.Type.KEYBOARD,
+			//?} else {
+			/*InputConstants.Type.KEYSYM,
+			 *///?}
+	InputConstants.UNKNOWN.getValue(), CATEGORY));
+	KeyMapping prevBarProfile = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.solid-bar.prevBarProfile",
+			//? if 26.3 {
+			InputConstants.Type.KEYBOARD,
+			//?} else {
+			/*InputConstants.Type.KEYSYM,
+			 *///?}
+	InputConstants.UNKNOWN.getValue(), CATEGORY));
+	KeyMapping resetBarProfile = KeyMappingHelper.registerKeyMapping(new KeyMapping("key.solid-bar.resetBarProfile",
+			//? if 26.3 {
+			InputConstants.Type.KEYBOARD,
+			//?} else {
+			/*InputConstants.Type.KEYSYM,
+			 *///?}
+	InputConstants.UNKNOWN.getValue(), CATEGORY));
 
 	@Override
 	public void onInitialize() {
 		LOGGER.info("[Solid Bar] Loading Solid Bar");
 		SolidBarConfig.CONFIG.load();
-		getModBarFormatted(SolidBarConfig.config().modBar);
 		ss = new StarScript();
 		ClientTickEvents.START_CLIENT_TICK.register(client -> {
 			if (client.level == null || client.player == null) return;
@@ -55,24 +82,52 @@ public class SolidBar implements ModInitializer {
 				SolidBarConfig.config().modEnabled = !SolidBarConfig.config().modEnabled;
 				SolidBarConfig.CONFIG.save();
 			}
+			if (!SolidBarConfig.config().modEnabled) return;
 			if (toggleStealthMode.consumeClick()) {
 				SolidBarConfig.config().stealthMode = !SolidBarConfig.config().stealthMode;
 				SolidBarConfig.CONFIG.save();
 			}
-			if (!SolidBarConfig.config().modEnabled) return;
-			if (modBarFormatted.isEmpty()) parseResult = "";
+			if (randomBarProfile.consumeClick()) {
+				if (SolidBarConfig.config().barProfiles.size() >= 2) {
+					SolidBarConfig.config().barProfileNumber = generateIndex(SolidBarConfig.config().barProfileNumber, SolidBarConfig.config().barProfiles.size());
+					SolidBarConfig.CONFIG.save();
+				}
+			}
+			if (nextBarProfile.consumeClick()) {
+				if (SolidBarConfig.config().barProfiles.size() >= 2) {
+					if (SolidBarConfig.config().barProfiles.size() - 1 == SolidBarConfig.config().barProfileNumber) {
+						SolidBarConfig.config().barProfileNumber = 0;
+					} else {
+						SolidBarConfig.config().barProfileNumber += 1;
+					}
+					SolidBarConfig.CONFIG.save();
+				}
+			}
+			if (prevBarProfile.consumeClick()) {
+				if (SolidBarConfig.config().barProfiles.size() >= 2) {
+					if (SolidBarConfig.config().barProfileNumber == 0) {
+						SolidBarConfig.config().barProfileNumber = SolidBarConfig.config().barProfiles.size() - 1;
+					} else {
+						SolidBarConfig.config().barProfileNumber -= 1;
+					}
+					SolidBarConfig.CONFIG.save();
+				}
+			}
+			if (resetBarProfile.consumeClick()) {
+				if (SolidBarConfig.config().barProfileNumber != 0) {
+					SolidBarConfig.config().barProfileNumber = 0;
+					SolidBarConfig.CONFIG.save();
+				}
+			}
 			parseResult = ss.run(StarScript.compile(modBarFormatted));
 		});
 	}
 
-	private void getModBarFormatted(String modBar) {
-		// Due to text changing position while stealth is enabled
-		//? if !26.2 {
-		if (SolidBarConfig.config().stealthMode) {
-			Pattern stealthPattern = Pattern.compile("\\{(player|entity)\\.(pos|convert|yaw|pitch)(\\.[xyz])?}");
-			modBar = stealthPattern.matcher(modBar).replaceAll(mr -> "&k" + mr.group() + "&r");
-		}
-		//?}
-		modBarFormatted = modBar.replace("&", "§");
+	private static int generateIndex(int current, int size) {
+		if (size < 2) return current;
+		int offset = random.nextInt(1, size);
+		int index = current + offset;
+		if (index >= size) index -= size;
+		return index;
 	}
 }
